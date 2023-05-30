@@ -30,6 +30,7 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         val name = binding.editName.text.toString()
 
         if (name != "") {
+
             //navegação de Activity(
             startActivity(Intent(this, MainActivity::class.java))
         } else {
