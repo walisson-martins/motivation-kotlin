@@ -6,12 +6,13 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.walissonm.motivation.infra.MotivationConstants
 import com.walissonm.motivation.R
+import com.walissonm.motivation.data.Mock
 import com.walissonm.motivation.infra.SecurityPreferences
 import com.walissonm.motivation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
-    private var categoryId = 1
+    private var categoryId = MotivationConstants.FILTER.ALL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         handleUserName()
         handleFilter(R.id.image_inclusive)
+        handleNextPhrase()
 
         binding.buttonNewPhrase.setOnClickListener(this)
         binding.imageEmotions.setOnClickListener(this)
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         if (view?.id == R.id.button_new_phrase) {
-            var s = ""
+            handleNextPhrase()
         } else if (view?.id in listOf(
                 R.id.image_emotions,
                 R.id.image_inclusive,
@@ -48,8 +50,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.textUserName.text = "Olá, ${name}!"
     }
 
-    private fun handleFilter(id: Int?) {
+    private fun handleNextPhrase() {
+        binding.textPhrase.text = Mock().getPhrases(categoryId)
+    }
 
+    private fun handleFilter(id: Int?) {
         binding.imageInclusive.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
         binding.imageEmotions.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
         binding.imageSunny.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
