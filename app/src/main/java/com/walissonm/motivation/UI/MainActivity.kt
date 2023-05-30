@@ -9,6 +9,7 @@ import com.walissonm.motivation.R
 import com.walissonm.motivation.data.Mock
 import com.walissonm.motivation.infra.SecurityPreferences
 import com.walissonm.motivation.databinding.ActivityMainBinding
+import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun handleNextPhrase() {
-        binding.textPhrase.text = Mock().getPhrases(categoryId)
+        binding.textPhrase.text = Mock().getPhrases(categoryId, Locale.getDefault().language)
     }
 
     private fun handleFilter(id: Int?) {
